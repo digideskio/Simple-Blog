@@ -1,0 +1,17 @@
+<template name="post">
+    <div class="container">
+    {{#if Template.subscriptionsReady}}
+        {{#with post}}
+            <h1>{{title}}</h1>
+            <h5>{{createdAt}}</h5>
+            <br/>
+            {{description}}
+
+            {{#if isAuthor }}
+                <button class="btn btn-danger" id="removePost"> Remove </button>
+            {{/if}}
+        {{/with}}
+    {{/if}}
+    </div>
+
+</template>

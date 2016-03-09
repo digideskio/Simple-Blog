@@ -1,0 +1,11 @@
+<template name="home">
+  <div class="container">
+    <div class="text-center">
+      <h1>Simple Blog !</h1>
+    </div>
+
+    {{#each posts}}
+        <a href="/post/{{_id}}">{{title}}</a> <br/>
+    {{/each}}
+  </div>
+</template>
