@@ -4,9 +4,14 @@
       <h1>Simple Blog !</h1>
     </div>
 
-    {{#each posts}}
-        <h3><a href="/post/{{_id}}">{{@index}}. {{title}}</a></h3>
-        <br/>
-    {{/each}}
+    {{#if Template.subscriptionsReady}}
+        {{#each posts}}
+            <h3><a href="/post/{{_id}}">{{@index}}. {{title}}</a></h3>
+            <br/>
+        {{/each}}
+
+    {{else}}
+        {{>spinner}}
+    {{/if}}
   </div>
 </template>
