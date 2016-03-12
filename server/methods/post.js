@@ -23,5 +23,19 @@ Meteor.methods({
         }
 
 
+    },
+    addLike: function(postId) {
+        try {
+            check(postId, String);
+            SimpleBlog.isAuthorizedUser(this);
+
+            Posts.update({ _id: postId }, { $addToSet: { likes: this.userId }, $inc: { count: 1 } });
+
+            //Posts.update({ _id: postId }, { $inc: { 'likes.count': 1 }});
+            console.log('ended');
+
+        } catch (e) {
+            throw  new Meteor.Error(403, e.message);
+        }
     }
 });

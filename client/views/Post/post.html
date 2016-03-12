@@ -5,7 +5,12 @@
             <h1>{{title}}</h1>
             <h5>{{createdAt}}</h5>
             <br/>
-            {{description}}
+            <p> {{description}} </p>
+            {{#if hasGivenLike }}
+                <i class="fa fa-thumbs-up fa-2x"></i> {{count}}
+            {{else}}
+                <span id="clickLike"><i class="fa fa-thumbs-o-up fa-2x"></i></span> {{count}}
+            {{/if}}
 
             {{#if isAuthor }}
                 <button class="btn btn-danger" id="removePost"> Remove </button>

@@ -14,6 +14,15 @@ Template.post.helpers({
             return (Meteor.userId() === this.createdBy._id);
         }
 
+    },
+    hasGivenLike: function() {
+        var likes = Posts.findOne().likes;
+        if(!Meteor.userId() || !likes) {
+            return false;
+        }
+
+        return (_.contains(likes,Meteor.userId()));
+
     }
 });
 
@@ -35,5 +44,12 @@ Template.post.events({
             });
         }
 
+    },
+    'click #clickLike': function(event,template) {
+        Meteor.call('addLike', this._id, function(err) {
+            if(err) {
+                sAlert.error(err);
+            }
+        });
     }
 });

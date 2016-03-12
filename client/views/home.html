@@ -5,7 +5,8 @@
     </div>
 
     {{#each posts}}
-        <a href="/post/{{_id}}">{{title}}</a> <br/>
+        <h3><a href="/post/{{_id}}">{{@index}}. {{title}}</a></h3>
+        <br/>
     {{/each}}
   </div>
 </template>
