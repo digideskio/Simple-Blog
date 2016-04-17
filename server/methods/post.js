@@ -1,14 +1,17 @@
 Meteor.methods({
     insertPost: function(doc) {
+        SimpleBlog.isAuthorizedUser(this);
+        
         check(doc,{
            title: String,
            description: String
         });
+
         Posts.insert(doc);
     },
     removePost: function(postId) {
         try {
-            console.log(typeof postId);
+            SimpleBlog.isAuthorizedUser(this);
             check(postId, String);
 
             var post = Posts.findOne({_id: postId});
@@ -21,8 +24,6 @@ Meteor.methods({
         } catch (e) {
             throw  new Meteor.Error(403, e.message);
         }
-
-
     },
     addLike: function(postId) {
         try {
@@ -30,9 +31,6 @@ Meteor.methods({
             SimpleBlog.isAuthorizedUser(this);
 
             Posts.update({ _id: postId }, { $addToSet: { likes: this.userId }, $inc: { count: 1 } });
-
-            //Posts.update({ _id: postId }, { $inc: { 'likes.count': 1 }});
-            console.log('ended');
 
         } catch (e) {
             throw  new Meteor.Error(403, e.message);
